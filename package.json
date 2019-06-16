@@ -1,0 +1,19 @@
+{
+  "name": "ts-raytracer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && cucumber-js features/ --format usage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/cucumber": "^4.0.5",
+    "chai": "^4.2.0",
+    "cucumber": "^5.1.0"
+  }
+}
