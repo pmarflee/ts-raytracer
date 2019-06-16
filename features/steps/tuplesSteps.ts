@@ -33,3 +33,19 @@ Then("a is not a vector", function () {
 Then("a is a vector", function () {
     expect(this.actual[3]).to.be.equal(0.0);
 });
+
+Given("p <- point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.actual = Tuples.point(x, y, z);
+});
+
+Then("p = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    expect(this.actual).to.have.same.members(Tuples.tuple(x, y, z, w));
+});
+
+Given("v <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.actual = Tuples.vector(x, y, z);
+});
+
+Then("v = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    expect(this.actual).to.have.same.members(Tuples.tuple(x, y, z, w));
+});
