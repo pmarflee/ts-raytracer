@@ -49,3 +49,15 @@ Given("v <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: n
 Then("v = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
     expect(this.actual).to.have.same.members(Tuples.tuple(x, y, z, w));
 });
+
+Given("a1 <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    this.a1 = Tuples.tuple(x, y, z, w);
+});
+
+Given("a2 <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    this.a2 = Tuples.tuple(x, y, z, w);
+});
+
+Then("a1 + a2 = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    expect(Tuples.add(this.a1, this.a2)).to.have.same.members(Tuples.tuple(x, y, z, w));
+})
