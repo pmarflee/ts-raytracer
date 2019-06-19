@@ -89,3 +89,19 @@ Given("v2 <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: 
 Then("v1 - v2 = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
     expect(Tuples.subtract(this.v1, this.v2)).to.have.same.members(Tuples.vector(x, y, z));
 });
+
+Given("zero <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.zero = Tuples.vector(x, y, z);
+});
+
+Then("zero - v = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(Tuples.subtract(this.zero, this.v)).to.have.same.members(Tuples.vector(x, y, z));
+});
+
+Given("a <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    this.actual = Tuples.tuple(x, y, z, w);
+});
+
+Then("-a = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    expect(Tuples.negate(this.actual)).to.have.same.members(Tuples.tuple(x, y, z, w));
+});
