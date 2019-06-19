@@ -7,5 +7,9 @@ declare module "cucumber" {
         actual: Tuple;
         a1: Tuple;
         a2: Tuple;
+        p: Tuple;
+        p1: Tuple;
+        p2: Tuple;
+        v: Tuple;
     }
 }

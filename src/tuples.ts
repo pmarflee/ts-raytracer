@@ -14,6 +14,10 @@ export class Tuples {
     static add(t1: Tuple, t2: Tuple) : Tuple {
         return this.tuple(t1[0] + t2[0], t1[1] + t2[1], t1[2] + t2[2], t1[3] + t2[3]);
     }
+
+    static subtract(t1: Tuple, t2: Tuple) : Tuple {
+        return this.tuple(t1[0] - t2[0], t1[1] - t2[1], t1[2] - t2[2], t1[3] - t2[3]);
+    }
 }
 
 export type Tuple = [number, number, number, number];
