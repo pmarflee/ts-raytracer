@@ -157,3 +157,11 @@ Given("b <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: n
 Then("dot\\(a, b) = {int}", function (expected: number) {
     expect(Tuples.dot(this.a, this.b)).to.equal(expected);
 });
+
+Then("cross\\(a, b) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(Tuples.cross(this.a, this.b)).to.have.same.members(Tuples.vector(x, y, z));
+});
+
+Then("cross\\(b, a) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(Tuples.cross(this.b, this.a)).to.have.same.members(Tuples.vector(x, y, z));
+});
