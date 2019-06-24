@@ -22,6 +22,10 @@ export class Tuples {
     static negate(t: Tuple) : Tuple {
         return this.tuple(-t[0], -t[1], -t[2], -t[3]);
     }
+
+    static multiply(t: Tuple, v: number) : Tuple {
+        return this.tuple(t[0] * v, t[1] * v, t[2] * v, t[3] * v);
+    }
 }
 
 export type Tuple = [number, number, number, number];
