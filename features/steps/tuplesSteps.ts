@@ -113,3 +113,11 @@ Then("a * {float} = tuple\\({float}, {float}, {float}, {float})", function (v: n
 Then("a / {float} = tuple\\({float}, {float}, {float}, {float})", function (v: number, x: number, y: number, z: number, w: number) {
     expect(Tuples.divide(this.actual, v)).to.have.same.members(Tuples.tuple(x, y, z, w));
 });
+
+Then("magnitude\\(v) = {int}", function (v: number) {
+    expect(Tuples.magnitude(this.v)).to.equal(v);
+});
+
+Then("magnitude\\(v) = √{int}", function (v: number) {
+    expect(Tuples.magnitude(this.v)).to.equal(Math.sqrt(v));
+});

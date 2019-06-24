@@ -30,6 +30,10 @@ export class Tuples {
     static divide(t: Tuple, v: number) : Tuple {
         return this.tuple(t[0] / v, t[1] / v, t[2] / v, t[3] / v);
     }
+
+    static magnitude(t: Tuple) : number {
+        return Math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2 + t[3]);
+    }
 }
 
 export type Tuple = [number, number, number, number];
