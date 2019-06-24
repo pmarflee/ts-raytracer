@@ -134,6 +134,8 @@ Then("normalize\\(v) = approximately vector\\({float}, {float}, {float})", funct
     let expected = Tuples.vector(x, y, z),
         actual = Tuples.normalize(this.v);
     expect(actual[0]).to.almost.equal(expected[0]);
+    expect(actual[1]).to.almost.equal(expected[1]);
+    expect(actual[2]).to.almost.equal(expected[2]);
 });
 
 When("norm <- normalize\\(v)", function () {
