@@ -12,8 +12,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.1.7",
+    "@types/chai-almost": "^1.0.0",
     "@types/cucumber": "^4.0.5",
     "chai": "^4.2.0",
+    "chai-almost": "^1.0.1",
     "cucumber": "^5.1.0"
   }
 }

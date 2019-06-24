@@ -12,5 +12,6 @@ declare module "cucumber" {
         p2: Tuple;
         v: Tuple;
         zero: Tuple;
+        norm: Tuple;
     }
 }

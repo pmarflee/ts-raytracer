@@ -1,6 +1,10 @@
+import chai from "chai";
 import { expect } from "chai";
+import chaiAlmost from "chai-almost";
 import { Given, When, Then } from "cucumber";
 import { Tuples } from "../../src/tuples";
+
+chai.use(chaiAlmost(0.00001));
 
 Given("a <- tuple\\({float}, {float}, {float}, {float})", function (x: number, y: number, z: number, w: number) {
     this.actual = Tuples.tuple(x, y, z, w);
@@ -120,4 +124,22 @@ Then("magnitude\\(v) = {int}", function (v: number) {
 
 Then("magnitude\\(v) = √{int}", function (v: number) {
     expect(Tuples.magnitude(this.v)).to.equal(Math.sqrt(v));
+});
+
+Then("normalize\\(v) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(Tuples.normalize(this.v)).to.have.same.members(Tuples.vector(x, y, z));
+});
+
+Then("normalize\\(v) = approximately vector\\({float}, {float}, {float})", function (x: number, y: number, z: number) {
+    let expected = Tuples.vector(x, y, z),
+        actual = Tuples.normalize(this.v);
+    expect(actual[0]).to.almost.equal(expected[0]);
+});
+
+When("norm <- normalize\\(v)", function () {
+    this.norm = Tuples.normalize(this.v);
+});
+
+Then("magnitude\\(norm) = {int}", function (v: number) {
+    expect(Tuples.magnitude(this.norm)).to.equal(v);
 });

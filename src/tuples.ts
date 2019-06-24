@@ -34,6 +34,14 @@ export class Tuples {
     static magnitude(t: Tuple) : number {
         return Math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2 + t[3]);
     }
+
+    static normalize(v: Tuple) : Tuple {
+        let magnitude = this.magnitude(v);
+        return this.tuple(v[0] / magnitude,
+                          v[1] / magnitude,
+                          v[2] / magnitude,
+                          v[3] / magnitude);
+    }
 }
 
 export type Tuple = [number, number, number, number];
