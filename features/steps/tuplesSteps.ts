@@ -109,3 +109,7 @@ Then("-a = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number,
 Then("a * {float} = tuple\\({float}, {float}, {float}, {float})", function (v: number, x: number, y: number, z: number, w: number) {
     expect(Tuples.multiply(this.actual, v)).to.have.same.members(Tuples.tuple(x, y, z, w));
 });
+
+Then("a / {float} = tuple\\({float}, {float}, {float}, {float})", function (v: number, x: number, y: number, z: number, w: number) {
+    expect(Tuples.divide(this.actual, v)).to.have.same.members(Tuples.tuple(x, y, z, w));
+});

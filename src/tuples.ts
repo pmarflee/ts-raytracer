@@ -26,6 +26,10 @@ export class Tuples {
     static multiply(t: Tuple, v: number) : Tuple {
         return this.tuple(t[0] * v, t[1] * v, t[2] * v, t[3] * v);
     }
+
+    static divide(t: Tuple, v: number) : Tuple {
+        return this.tuple(t[0] / v, t[1] / v, t[2] / v, t[3] / v);
+    }
 }
 
 export type Tuple = [number, number, number, number];
