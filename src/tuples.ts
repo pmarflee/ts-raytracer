@@ -42,6 +42,13 @@ export class Tuples {
                           v[2] / magnitude,
                           v[3] / magnitude);
     }
+
+    static dot(a: Tuple, b: Tuple) : number {
+        return a[0] * b[0] +
+               a[1] * b[1] +
+               a[2] * b[2] +
+               a[3] * b[3];
+    }
 }
 
 export type Tuple = [number, number, number, number];

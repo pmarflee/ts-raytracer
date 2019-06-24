@@ -145,3 +145,15 @@ When("norm <- normalize\\(v)", function () {
 Then("magnitude\\(norm) = {int}", function (v: number) {
     expect(Tuples.magnitude(this.norm)).to.equal(v);
 });
+
+Given("a <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.a = Tuples.vector(x, y, z);
+});
+
+Given("b <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.b = Tuples.vector(x, y, z);
+});
+
+Then("dot\\(a, b) = {int}", function (expected: number) {
+    expect(Tuples.dot(this.a, this.b)).to.equal(expected);
+});
