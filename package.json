@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "tsc && cucumber-js features/ --format summary",
-    "cannon": "ts-node.cmd src/cannon.ts"
+    "cannon": "tsc && ts-node.cmd src/cannon.ts"
   },
   "keywords": [],
   "author": "",
