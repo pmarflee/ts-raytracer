@@ -32,7 +32,7 @@ export class Tuples {
     }
 
     static magnitude(t: Tuple) : number {
-        return Math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2 + t[3]);
+        return Math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2 + t[3] ** 2);
     }
 
     static normalize(v: Tuple) : Tuple {
