@@ -22,6 +22,6 @@ let projectile = new Projectile(Tuples.point(0, 1, 0), Tuples.normalize(Tuples.v
     i = 0;
 
 while (projectile.position[1] > 0) {
-    projectile = tick(environment, projectile);
     console.log(`position: ${ projectile.position }, ticks: ${ ++i }`);
+    projectile = tick(environment, projectile);
 }
