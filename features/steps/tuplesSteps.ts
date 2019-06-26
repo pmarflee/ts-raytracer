@@ -181,3 +181,27 @@ Then("c.green = {float}", function (expected: number) {
 Then("c.blue = {float}", function (expected: number) {
     expect(this.c[2]).to.equal(expected);
 });
+
+Given("c1 <- color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    this.c1 = Tuples.color(red, green, blue);
+});
+
+Given("c2 <- color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    this.c2 = Tuples.color(red, green, blue);
+});
+
+Then("c1 + c2 = color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    expect(Tuples.add(this.c1, this.c2)).to.eql(Tuples.color(red, green, blue));
+});
+
+Then("c1 - c2 = color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    expect(Tuples.subtract(this.c1, this.c2)).to.almost.eql(Tuples.color(red, green, blue));
+});
+
+Then("c * {float} = color\\({float}, {float}, {float})", function (multiplier: number, red: number, green: number, blue: number) {
+    expect(Tuples.multiply(this.c, multiplier)).to.eql(Tuples.color(red, green, blue));
+});
+
+Then("c1 * c2 = color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    expect(Tuples.hadamardProduct(this.c1, this.c2)).to.almost.eql(Tuples.color(red, green, blue));
+});
