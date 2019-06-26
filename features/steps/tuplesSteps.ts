@@ -165,3 +165,19 @@ Then("cross\\(a, b) = vector\\({int}, {int}, {int})", function (x: number, y: nu
 Then("cross\\(b, a) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
     expect(Tuples.cross(this.b, this.a)).to.eql(Tuples.vector(x, y, z));
 });
+
+Given("c <- color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    this.c = Tuples.color(red, green, blue);
+});
+
+Then("c.red = {float}", function (expected: number) {
+    expect(this.c[0]).to.equal(expected);
+});
+
+Then("c.green = {float}", function (expected: number) {
+    expect(this.c[1]).to.equal(expected);
+});
+
+Then("c.blue = {float}", function (expected: number) {
+    expect(this.c[2]).to.equal(expected);
+});

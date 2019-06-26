@@ -56,6 +56,10 @@ export class Tuples {
                 a[2] * b[0] - a[0] * b[2],
                 a[0] * b[1] - a[1] * b[0]);
     }
+
+    static color(red: number, green: number, blue: number) : Tuple {
+        return this.tuple(red, green, blue, 0);
+    }
 }
 
 export type Tuple = [number, number, number, number];
