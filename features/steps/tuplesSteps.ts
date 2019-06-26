@@ -131,11 +131,7 @@ Then("normalize\\(v) = vector\\({int}, {int}, {int})", function (x: number, y: n
 });
 
 Then("normalize\\(v) = approximately vector\\({float}, {float}, {float})", function (x: number, y: number, z: number) {
-    let expected = Tuples.vector(x, y, z),
-        actual = Tuples.normalize(this.v);
-    expect(actual[0]).to.almost.equal(expected[0]);
-    expect(actual[1]).to.almost.equal(expected[1]);
-    expect(actual[2]).to.almost.equal(expected[2]);
+    expect(Tuples.normalize(this.v)).to.almost.eql(Tuples.vector(x, y, z));
 });
 
 When("norm <- normalize\\(v)", function () {
