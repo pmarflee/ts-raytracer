@@ -43,7 +43,7 @@ Given("p <- point\\({int}, {int}, {int})", function (x: number, y: number, z: nu
 });
 
 Then("p = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
-    expect(this.p).to.have.same.members(Tuples.tuple(x, y, z, w));
+    expect(this.p).to.eql(Tuples.tuple(x, y, z, w));
 });
 
 Given("v <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
@@ -51,7 +51,7 @@ Given("v <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: n
 });
 
 Then("v = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
-    expect(this.v).to.have.same.members(Tuples.tuple(x, y, z, w));
+    expect(this.v).to.eql(Tuples.tuple(x, y, z, w));
 });
 
 Given("a1 <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
@@ -63,7 +63,7 @@ Given("a2 <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: numbe
 });
 
 Then("a1 + a2 = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
-    expect(Tuples.add(this.a1, this.a2)).to.have.same.members(Tuples.tuple(x, y, z, w));
+    expect(Tuples.add(this.a1, this.a2)).to.eql(Tuples.tuple(x, y, z, w));
 });
 
 Given("p1 <- point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
@@ -75,11 +75,11 @@ Given("p2 <- point\\({int}, {int}, {int})", function (x: number, y: number, z: n
 });
 
 Then("p1 - p2 = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.subtract(this.p1, this.p2)).to.have.same.members(Tuples.vector(x, y, z));
+    expect(Tuples.subtract(this.p1, this.p2)).to.eql(Tuples.vector(x, y, z));
 });
 
 Then("p - v = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.subtract(this.p, this.v)).to.have.same.members(Tuples.point(x, y, z));
+    expect(Tuples.subtract(this.p, this.v)).to.eql(Tuples.point(x, y, z));
 });
 
 Given("v1 <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
@@ -91,7 +91,7 @@ Given("v2 <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: 
 });
 
 Then("v1 - v2 = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.subtract(this.v1, this.v2)).to.have.same.members(Tuples.vector(x, y, z));
+    expect(Tuples.subtract(this.v1, this.v2)).to.eql(Tuples.vector(x, y, z));
 });
 
 Given("zero <- vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
@@ -99,7 +99,7 @@ Given("zero <- vector\\({int}, {int}, {int})", function (x: number, y: number, z
 });
 
 Then("zero - v = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.subtract(this.zero, this.v)).to.have.same.members(Tuples.vector(x, y, z));
+    expect(Tuples.subtract(this.zero, this.v)).to.eql(Tuples.vector(x, y, z));
 });
 
 Given("a <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
@@ -107,15 +107,15 @@ Given("a <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number
 });
 
 Then("-a = tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
-    expect(Tuples.negate(this.actual)).to.have.same.members(Tuples.tuple(x, y, z, w));
+    expect(Tuples.negate(this.actual)).to.eql(Tuples.tuple(x, y, z, w));
 });
 
 Then("a * {float} = tuple\\({float}, {float}, {float}, {float})", function (v: number, x: number, y: number, z: number, w: number) {
-    expect(Tuples.multiply(this.actual, v)).to.have.same.members(Tuples.tuple(x, y, z, w));
+    expect(Tuples.multiply(this.actual, v)).to.eql(Tuples.tuple(x, y, z, w));
 });
 
 Then("a / {float} = tuple\\({float}, {float}, {float}, {float})", function (v: number, x: number, y: number, z: number, w: number) {
-    expect(Tuples.divide(this.actual, v)).to.have.same.members(Tuples.tuple(x, y, z, w));
+    expect(Tuples.divide(this.actual, v)).to.eql(Tuples.tuple(x, y, z, w));
 });
 
 Then("magnitude\\(v) = {int}", function (v: number) {
@@ -127,7 +127,7 @@ Then("magnitude\\(v) = √{int}", function (v: number) {
 });
 
 Then("normalize\\(v) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.normalize(this.v)).to.have.same.members(Tuples.vector(x, y, z));
+    expect(Tuples.normalize(this.v)).to.eql(Tuples.vector(x, y, z));
 });
 
 Then("normalize\\(v) = approximately vector\\({float}, {float}, {float})", function (x: number, y: number, z: number) {
@@ -159,9 +159,9 @@ Then("dot\\(a, b) = {int}", function (expected: number) {
 });
 
 Then("cross\\(a, b) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.cross(this.a, this.b)).to.have.same.members(Tuples.vector(x, y, z));
+    expect(Tuples.cross(this.a, this.b)).to.eql(Tuples.vector(x, y, z));
 });
 
 Then("cross\\(b, a) = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
-    expect(Tuples.cross(this.b, this.a)).to.have.same.members(Tuples.vector(x, y, z));
+    expect(Tuples.cross(this.b, this.a)).to.eql(Tuples.vector(x, y, z));
 });
