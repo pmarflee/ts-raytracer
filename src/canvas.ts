@@ -1,4 +1,5 @@
 import { Tuples, Tuple } from "./tuples";
+import { stringify } from "querystring";
 
 export default class Canvas {
     private readonly data: Tuple[][];
@@ -28,5 +29,11 @@ export default class Canvas {
 
     public writePixel(x: number, y: number, c: Tuple): void {
         this.data[y][x] = c;
+    }
+
+    public toPPM(): string {
+        return [ "P3",
+                 `${this.width} ${this.height}`,
+                 "255" ].join("\n");
     }
 }

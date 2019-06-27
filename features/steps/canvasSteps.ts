@@ -6,7 +6,8 @@ import { Tuple, Tuples } from "../../src/tuples";
 import Canvas from "../../src/canvas";
 
 let canvas: Canvas,
-    red: Tuple;
+    red: Tuple,
+    ppm: string;
 
 chai.use(chaiAlmost(0.00001));
 
@@ -42,4 +43,15 @@ When("write_pixel\\(c, {int}, {int}, red)", (x: number, y: number) => {
 
 Then("pixel_at\\(c, {int}, {int}) = red", (x: number, y: number) => {
     expect(canvas.readPixel(x, y)).to.eql(red);
+});
+
+When("ppm <- canvas_to_ppm\\(c)", () => {
+    ppm = canvas.toPPM();
+});
+
+Then("lines {int}-{int} of ppm are", (from: number, to: number, expected: string) => {
+    let expectedLines = expected.split("\r\n").slice(from - 1, to - 1),
+        actualLines = ppm.split("\r\n").slice(from - 1, to - 1);
+
+    expect(actualLines).to.be.eql(expectedLines);
 });
