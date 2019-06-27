@@ -5,7 +5,8 @@ import { Given, When, Then } from "cucumber";
 import { Tuple, Tuples } from "../../src/tuples";
 import Canvas from "../../src/canvas";
 
-let canvas: Canvas;
+let canvas: Canvas,
+    red: Tuple;
 
 chai.use(chaiAlmost(0.00001));
 
@@ -26,7 +27,19 @@ Then("every pixel of c is color\\({int}, {int}, {int})", (red: number, green: nu
 
     for (let i = 0; i < canvas.height; i++) {
         for (let j = 0; j < canvas.width; j++) {
-            expect(canvas.data[i][j]).to.eql(expected);
+            expect(canvas.readPixel(j, i)).to.eql(expected);
         }
     }
+});
+
+Given("red <- color\\({int}, {int}, {int})", (r: number, g: number, b: number) => {
+    red = Tuples.color(r, g, b);
+});
+
+When("write_pixel\\(c, {int}, {int}, red)", (x: number, y: number) => {
+    canvas.writePixel(x, y, red);
+});
+
+Then("pixel_at\\(c, {int}, {int}) = red", (x: number, y: number) => {
+    expect(canvas.readPixel(x, y)).to.eql(red);
 });

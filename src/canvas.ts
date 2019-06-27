@@ -1,7 +1,7 @@
 import { Tuples, Tuple } from "./tuples";
 
 export default class Canvas {
-    public readonly data: Tuple[][];
+    private readonly data: Tuple[][];
 
     get width(): number {
         return this.data[0].length;
@@ -20,5 +20,13 @@ export default class Canvas {
                 this.data[i][j] = Tuples.color(0, 0, 0);
             }
         }
+    }
+
+    public readPixel(x: number, y: number): Tuple {
+        return this.data[y][x];
+    }
+
+    public writePixel(x: number, y: number, c: Tuple): void {
+        this.data[y][x] = c;
     }
 }
