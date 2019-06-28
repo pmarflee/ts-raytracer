@@ -48,7 +48,6 @@ When("ppm <- canvas_to_ppm\\(c)", function () {
 Then("lines {int}-{int} of ppm are", function (from: number, to: number, expected: string) {
     let expectedLines = expected.split("\n"),
         actualLines = this.ppm.split("\n").slice(from - 1, to);
-
     expect(actualLines).to.be.eql(expectedLines);
 });
 
@@ -66,4 +65,12 @@ When("write_pixel\\(c, {int}, {int}, c2)", function (x: number, y: number) {
 
 When("write_pixel\\(c, {int}, {int}, c3)", function (x: number, y: number) {
     this.canvas.writePixel(x, y, this.c3);
+});
+
+Given("every pixel of c is set to color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
+    for (let i = 0; i < this.canvas.height; i++) {
+        for (let j = 0; j < this.canvas.width; j++) {
+            this.canvas.writePixel(j, i, Tuples.color(red, green, blue));
+        }
+    }
 });

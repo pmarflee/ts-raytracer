@@ -3,6 +3,7 @@ import { Tuples, Tuple } from "./tuples";
 export default class Canvas {
 
     private static readonly maxColorValue = 255;
+    private static readonly maxLineLength = 70;
 
     private readonly data: Tuple[][];
 
@@ -50,7 +51,7 @@ export default class Canvas {
 
     private * generatePPMPixelData(): IterableIterator<string> {
         for (let i: number = 0; i < this.height; i++) {
-            yield [ ...this.generatePPMPixelDataLine(this.data[i]) ].join(" ");
+            yield * this.splitLine([ ...this.generatePPMPixelDataLine(this.data[i]) ].join(" "));
         }
     }
 
@@ -59,6 +60,30 @@ export default class Canvas {
             for (let j: number = 0; j < 3; j++) {
                 yield this.clamp(this.scale(lineData[i][j]));
             }
+        }
+    }
+
+    private * splitLine(line: string): IterableIterator<string> {
+        if (line.length <= Canvas.maxLineLength) {
+            yield line;
+            return;
+        }
+
+        let start = 0, i = 0, lastSpace = 0;
+        while (i < line.length) {
+            if (line[i] === ' ') {
+                lastSpace = i;
+            }
+            if (i - start === Canvas.maxLineLength) {
+                yield line.substring(start, lastSpace);
+                i = start = lastSpace + 1;
+            } else {
+                i++;
+            }
+        }
+
+        if (i > lastSpace) {
+            yield line.substring(start);
         }
     }
 
