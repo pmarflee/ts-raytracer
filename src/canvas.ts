@@ -1,7 +1,9 @@
 import { Tuples, Tuple } from "./tuples";
-import { stringify } from "querystring";
 
 export default class Canvas {
+
+    private static readonly maxColorValue = 255;
+
     private readonly data: Tuple[][];
 
     get width(): number {
@@ -15,9 +17,9 @@ export default class Canvas {
     constructor(width: number, height: number) {
         this.data = [];
 
-        for (var i: number = 0; i < height; i++) {
+        for (let i: number = 0; i < height; i++) {
             this.data[i] = [];
-            for (var j: number = 0; j < width; j++) {
+            for (let j: number = 0; j < width; j++) {
                 this.data[i][j] = Tuples.color(0, 0, 0);
             }
         }
@@ -32,8 +34,41 @@ export default class Canvas {
     }
 
     public toPPM(): string {
-        return [ "P3",
-                 `${this.width} ${this.height}`,
-                 "255" ].join("\n");
+        return [ ...this.generatePPM() ].join("\n");
+    }
+
+    private * generatePPM(): IterableIterator<string> {
+        yield * this.generatePPMHeader();
+        yield * this.generatePPMPixelData();
+    }
+
+    private * generatePPMHeader(): IterableIterator<string> {
+        yield "P3";
+        yield `${this.width} ${this.height}`;
+        yield Canvas.maxColorValue.toString();
+    }
+
+    private * generatePPMPixelData(): IterableIterator<string> {
+        for (let i: number = 0; i < this.height; i++) {
+            yield [ ...this.generatePPMPixelDataLine(this.data[i]) ].join(" ");
+        }
+    }
+
+    private * generatePPMPixelDataLine(lineData: Tuple[]): IterableIterator<number> {
+        for (let i: number = 0; i < this.width; i++) {
+            for (let j: number = 0; j < 3; j++) {
+                yield this.clamp(this.scale(lineData[i][j]));
+            }
+        }
+    }
+
+    private scale(value: number): number {
+        return Math.round(value * Canvas.maxColorValue);
+    }
+
+    private clamp(value: number): number {
+        if (value < 0) return 0;
+        if (value > Canvas.maxColorValue) return Canvas.maxColorValue;
+        return value;
     }
 }

@@ -5,53 +5,65 @@ import { Given, When, Then } from "cucumber";
 import { Tuple, Tuples } from "../../src/tuples";
 import Canvas from "../../src/canvas";
 
-let canvas: Canvas,
-    red: Tuple,
-    ppm: string;
-
 chai.use(chaiAlmost(0.00001));
 
-Given("c <- canvas\\({int}, {int})", (width: number, height: number) => {
-    canvas = new Canvas(width, height);
+Given("c <- canvas\\({int}, {int})", function (width: number, height: number) {
+    this.canvas = new Canvas(width, height);
 });
 
-Then("c.width = {int}", (expected: number) => {
-    expect(canvas.width).to.be.equal(expected);
+Then("c.width = {int}", function (expected: number) {
+    expect(this.canvas.width).to.be.equal(expected);
 });
 
-Then("c.height = {int}", (expected: number) => {
-    expect(canvas.height).to.be.equal(expected);
+Then("c.height = {int}", function (expected: number) {
+    expect(this.canvas.height).to.be.equal(expected);
 });
 
-Then("every pixel of c is color\\({int}, {int}, {int})", (red: number, green: number, blue: number) => {
+Then("every pixel of c is color\\({int}, {int}, {int})", function (red: number, green: number, blue: number) {
     let expected = Tuples.color(0, 0, 0);
 
-    for (let i = 0; i < canvas.height; i++) {
-        for (let j = 0; j < canvas.width; j++) {
-            expect(canvas.readPixel(j, i)).to.eql(expected);
+    for (let i = 0; i < this.canvas.height; i++) {
+        for (let j = 0; j < this.canvas.width; j++) {
+            expect(this.canvas.readPixel(j, i)).to.eql(expected);
         }
     }
 });
 
-Given("red <- color\\({int}, {int}, {int})", (r: number, g: number, b: number) => {
-    red = Tuples.color(r, g, b);
+Given("red <- color\\({int}, {int}, {int})", function (r: number, g: number, b: number) {
+    this.red = Tuples.color(r, g, b);
 });
 
-When("write_pixel\\(c, {int}, {int}, red)", (x: number, y: number) => {
-    canvas.writePixel(x, y, red);
+When("write_pixel\\(c, {int}, {int}, red)", function (x: number, y: number) {
+    this.canvas.writePixel(x, y, this.red);
 });
 
-Then("pixel_at\\(c, {int}, {int}) = red", (x: number, y: number) => {
-    expect(canvas.readPixel(x, y)).to.eql(red);
+Then("pixel_at\\(c, {int}, {int}) = red", function (x: number, y: number) {
+    expect(this.canvas.readPixel(x, y)).to.eql(this.red);
 });
 
-When("ppm <- canvas_to_ppm\\(c)", () => {
-    ppm = canvas.toPPM();
+When("ppm <- canvas_to_ppm\\(c)", function () {
+    this.ppm = this.canvas.toPPM();
 });
 
-Then("lines {int}-{int} of ppm are", (from: number, to: number, expected: string) => {
-    let expectedLines = expected.split("\r\n").slice(from - 1, to - 1),
-        actualLines = ppm.split("\r\n").slice(from - 1, to - 1);
+Then("lines {int}-{int} of ppm are", function (from: number, to: number, expected: string) {
+    let expectedLines = expected.split("\n"),
+        actualLines = this.ppm.split("\n").slice(from - 1, to);
 
     expect(actualLines).to.be.eql(expectedLines);
+});
+
+Given("c3 <- color\\({float}, {float}, {float})", function (r: number, g: number, b: number) {
+    this.c3 = Tuples.color(r, g, b);
+});
+
+When("write_pixel\\(c, {int}, {int}, c1)", function (x: number, y: number) {
+    this.canvas.writePixel(x, y, this.c1);
+});
+
+When("write_pixel\\(c, {int}, {int}, c2)", function (x: number, y: number) {
+    this.canvas.writePixel(x, y, this.c2);
+});
+
+When("write_pixel\\(c, {int}, {int}, c3)", function (x: number, y: number) {
+    this.canvas.writePixel(x, y, this.c3);
 });
