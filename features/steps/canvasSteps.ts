@@ -1,11 +1,13 @@
 import chai from "chai";
 import { expect } from "chai";
 import chaiAlmost from "chai-almost";
+import chaiString from "chai-string";
 import { Given, When, Then } from "cucumber";
 import { Tuple, Tuples } from "../../src/tuples";
 import Canvas from "../../src/canvas";
 
 chai.use(chaiAlmost(0.00001));
+chai.use(chaiString);
 
 Given("c <- canvas\\({int}, {int})", function (width: number, height: number) {
     this.canvas = new Canvas(width, height);
@@ -73,4 +75,8 @@ Given("every pixel of c is set to color\\({float}, {float}, {float})", function 
             this.canvas.writePixel(j, i, Tuples.color(red, green, blue));
         }
     }
+});
+
+Then("ppm ends with a newline character", function () {
+    expect(this.ppm).to.endsWith("\n");
 });

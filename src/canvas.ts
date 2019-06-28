@@ -35,7 +35,7 @@ export default class Canvas {
     }
 
     public toPPM(): string {
-        return [ ...this.generatePPM() ].join("\n");
+        return [ ...this.generatePPM() ].join("\n") + "\n";
     }
 
     private * generatePPM(): IterableIterator<string> {
