@@ -1,4 +1,6 @@
 import { Tuples, Tuple } from "./tuples";
+import * as NodeCanvas from "canvas";
+import fs from 'fs';
 
 export default class Canvas {
 
@@ -36,6 +38,22 @@ export default class Canvas {
 
     public toPPM(): string {
         return [ ...this.generatePPM() ].join("\n") + "\n";
+    }
+
+    public toImage(filename: string): void {
+        let canvas = NodeCanvas.createCanvas(this.width, this.height),
+            ctx = canvas.getContext("2d"),
+            imageData = ctx.getImageData(0, 0, this.width, this.height);
+        
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                this.drawPixel(imageData, x, this.height - y, this.data[y][x]);
+            }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        fs.writeFileSync(filename, canvas.toBuffer());
     }
 
     private * generatePPM(): IterableIterator<string> {
@@ -95,5 +113,14 @@ export default class Canvas {
         if (value < 0) return 0;
         if (value > Canvas.maxColorValue) return Canvas.maxColorValue;
         return value;
+    }
+
+    private drawPixel(imageData: NodeCanvas.ImageData, x: number, y: number, color: Tuple): void {
+        let index = (x + y * this.width) * 4; 
+
+        imageData.data[index + 0] = color[0];
+        imageData.data[index + 1] = color[1];
+        imageData.data[index + 2] = color[2];
+        imageData.data[index + 3] = 255;
     }
 }
