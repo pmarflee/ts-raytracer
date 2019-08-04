@@ -1,3 +1,5 @@
+import { Tuple, Tuples } from "./tuples";
+
 export class Matrices {
     static matrix(table: string[][]) : Matrix {
         let data : Matrix = [];
@@ -33,11 +35,17 @@ export class Matrices {
     }
 
     static multiply(m1: Matrix, m2: Matrix) : Matrix {
+        let singleColumn = m2[0].length === 0;
         return m1.map((row: number[], y: number) => 
             row.map((value: number, x: number) => 
                 row.reduce((acc: number, cur: number, idx: number) =>
-                    acc + (cur * m2[idx][x]), 0)
+                    acc + (cur * m2[idx][singleColumn ? 0 : x]), 0)
             ));
+    }
+
+    static multiplyByTuple(m: Matrix, t: Tuple) : Tuple {
+        return <Tuple> Matrices.multiply(m, 
+            [[t[0]], [t[1]], [t[2]], [t[3]]])[0];
     }
 }
 

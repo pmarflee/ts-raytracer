@@ -2,6 +2,7 @@ import chai from "chai";
 import { expect } from "chai";
 import { Given, When, Then, TableDefinition } from "cucumber";
 import { Matrices } from "../../src/matrices";
+import { Tuples } from "../../src/tuples";
 
 Given("the following {int}x{int} matrix M:", function (width: number, height: number, table: TableDefinition) {
     this.M = Matrices.matrix(table.raw());
@@ -13,6 +14,10 @@ Given("the following matrix A:", function (table: TableDefinition) {
 
 Given("the following matrix B:", function (table: TableDefinition) {
     this.B = Matrices.matrix(table.raw());
+});
+
+Given("b <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
+    this.b = Tuples.tuple(x, y, z, w);
 });
 
 Then("M[{int},{int}] = {float}", function (y: number, x: number, expected: number) {
@@ -32,3 +37,7 @@ Then("A * B is the following {int}x{int} matrix:", function (width: number, heig
         actual = Matrices.multiply(this.A, this.B);
     expect(Matrices.compare(expected, actual)).to.be.true;
 });
+
+Then("A * b = tuple\\({int}, {int}, {int}, {int})", function (a: number, b: number, c: number, d: number) {
+    expect(Matrices.multiplyByTuple(this.A, this.b)).to.eql(Tuples.tuple(a, b, c, d));
+})
