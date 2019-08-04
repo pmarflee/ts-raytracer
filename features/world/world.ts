@@ -24,6 +24,8 @@ declare module "cucumber" {
         red: Tuple,
         canvas: Canvas,
         ppm: string,
-        M: Matrix
+        M: Matrix,
+        A: Matrix,
+        B: Matrix
     }
 }
