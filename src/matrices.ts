@@ -16,7 +16,7 @@ export class Matrices {
         if (m1.length !== m2.length) {
             return false;
         }
-
+        
         for (let y = 0; y < m1.length; y++) {
             if (m1[y].length !== m2[y].length) {
                 return false;
@@ -30,6 +30,14 @@ export class Matrices {
         }
 
         return true;
+    }
+
+    static multiply(m1: Matrix, m2: Matrix) : Matrix {
+        return m1.map((row: number[], y: number) => 
+            row.map((value: number, x: number) => 
+                row.reduce((acc: number, cur: number, idx: number) =>
+                    acc + (cur * m2[idx][x]), 0)
+            ));
     }
 }
 

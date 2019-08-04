@@ -26,3 +26,9 @@ Then("A = B", function () {
 Then("A != B", function () {
     expect(Matrices.compare(this.A, this.B)).to.be.false;
 });
+
+Then("A * B is the following {int}x{int} matrix:", function (width: number, height: number, table: TableDefinition) {
+    let expected = Matrices.matrix(table.raw()),
+        actual = Matrices.multiply(this.A, this.B);
+    expect(Matrices.compare(expected, actual)).to.be.true;
+});
