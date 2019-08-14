@@ -40,4 +40,13 @@ Then("A * B is the following {int}x{int} matrix:", function (width: number, heig
 
 Then("A * b = tuple\\({int}, {int}, {int}, {int})", function (a: number, b: number, c: number, d: number) {
     expect(Matrices.multiplyByTuple(this.A, this.b)).to.eql(Tuples.tuple(a, b, c, d));
-})
+});
+
+Then("A * identity_matrix = A", function () {
+    expect(Matrices.multiply(this.A, Matrices.identity)).to.eql(this.A);
+});
+
+Then("identity_matrix * a = a", function () {
+    console.log(this.a);
+    expect(Matrices.multiplyByTuple(Matrices.identity, this.a)).to.be.eql(this.a);
+});

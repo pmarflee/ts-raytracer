@@ -59,6 +59,13 @@ export class Matrices {
             result[2][0],
             result[3][0]);
     }
+
+    static readonly identity : Matrix = [
+        [ 1, 0, 0, 0 ],
+        [ 0, 1, 0, 0 ],
+        [ 0, 0, 1, 0 ],
+        [ 0, 0, 0, 1 ] 
+    ];
 }
 
 export type Matrix = number[][];

@@ -7,35 +7,35 @@ import { Tuple, Tuples } from "../../src/tuples";
 chai.use(chaiAlmost(0.00001));
 
 Given("a <- tuple\\({float}, {float}, {float}, {float})", function (x: number, y: number, z: number, w: number) {
-    this.actual = Tuples.tuple(x, y, z, w);
+    this.a = Tuples.tuple(x, y, z, w);
 });
 
 Then("a.x = {float}", function (expected: number) {
-    expect(this.actual[0]).to.be.equal(expected);
+    expect(this.a[0]).to.be.equal(expected);
 });
 
 Then("a.y = {float}", function (expected: number) {
-    expect(this.actual[1]).to.be.equal(expected);
+    expect(this.a[1]).to.be.equal(expected);
 });
 
 Then("a.z = {float}", function (expected: number) {
-    expect(this.actual[2]).to.be.equal(expected);
+    expect(this.a[2]).to.be.equal(expected);
 });
 
 Then("a.w = {float}", function (expected: number) {
-    expect(this.actual[3]).to.be.equal(expected);
+    expect(this.a[3]).to.be.equal(expected);
 });
 
 Then("a is a point", function () {
-    expect(this.actual[3]).to.be.equal(1.0);
+    expect(this.a[3]).to.be.equal(1.0);
 });
 
 Then("a is not a vector", function () {
-    expect(this.actual[3]).to.not.be.equal(0.0);
+    expect(this.a[3]).to.not.be.equal(0.0);
 });
 
 Then("a is a vector", function () {
-    expect(this.actual[3]).to.be.equal(0.0);
+    expect(this.a[3]).to.be.equal(0.0);
 });
 
 Given("p <- point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
