@@ -35,17 +35,29 @@ export class Matrices {
     }
 
     static multiply(m1: Matrix, m2: Matrix) : Matrix {
-        let singleColumn = m2[0].length === 0;
-        return m1.map((row: number[], y: number) => 
-            row.map((value: number, x: number) => 
-                row.reduce((acc: number, cur: number, idx: number) =>
-                    acc + (cur * m2[idx][singleColumn ? 0 : x]), 0)
-            ));
+        let m : Matrix = [];
+        for (let row : number = 0; row < m1.length; row++) {
+            let mr : number[] = [];
+            for (let col : number = 0; col < m2[row].length; col++) {
+                let v : number = 0;
+                for (let i : number = 0; i < m1[row].length; i++) {
+                    v += m1[row][i] * m2[i][col];
+                }
+                mr.push(v);
+            }
+            m.push(mr);
+        }
+        return m;
     }
 
     static multiplyByTuple(m: Matrix, t: Tuple) : Tuple {
-        return <Tuple> Matrices.multiply(m, 
-            [[t[0]], [t[1]], [t[2]], [t[3]]])[0];
+        let result = Matrices.multiply(m, 
+            [[t[0]], [t[1]], [t[2]], [t[3]]]);
+        return Tuples.tuple(
+            result[0][0],
+            result[1][0],
+            result[2][0],
+            result[3][0]);
     }
 }
 
