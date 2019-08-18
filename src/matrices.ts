@@ -73,6 +73,10 @@ export class Matrices {
         return t;
     }
 
+    static determinant(m: Matrix) : number {
+        return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+    };
+
     static readonly identity : Matrix = [
         [ 1, 0, 0, 0 ],
         [ 0, 1, 0, 0 ],

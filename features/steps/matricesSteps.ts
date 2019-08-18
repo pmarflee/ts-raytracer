@@ -8,6 +8,10 @@ Given("the following {int}x{int} matrix M:", function (width: number, height: nu
     this.M = Matrices.matrix(table.raw());
 });
 
+Given("the following {int}x{int} matrix A:", function (width: number, height: number, table: TableDefinition) {
+    this.A = Matrices.matrix(table.raw());
+});
+
 Given("the following matrix A:", function (table: TableDefinition) {
     this.A = Matrices.matrix(table.raw());
 });
@@ -60,4 +64,8 @@ Then("transpose\\(A) is the following matrix", function (table: TableDefinition)
 
 Then("A = identity_matrix", function () {
     expect(this.A).to.eql(Matrices.identity);
+});
+
+Then("determinant\\(A) = {int}", function (expected: number) {
+    expect(Matrices.determinant(this.A)).equals(expected);
 });
