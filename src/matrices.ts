@@ -77,6 +77,22 @@ export class Matrices {
         return m[0][0] * m[1][1] - m[0][1] * m[1][0];
     };
 
+    static submatrix(m: Matrix, rowToRemove: number, colToRemove: number) : Matrix {
+        let s : Matrix = [];
+
+        for (let row: number = 0; row < m.length; row++) {
+            if (row === rowToRemove) continue;
+            let sr : number[] = [];
+            for (let col: number = 0; col < m[row].length; col++) {
+                if (col === colToRemove) continue;
+                sr.push(m[row][col]);
+            }
+            s.push(sr);
+        }
+
+        return s;
+    }
+
     static readonly identity : Matrix = [
         [ 1, 0, 0, 0 ],
         [ 0, 1, 0, 0 ],

@@ -69,3 +69,7 @@ Then("A = identity_matrix", function () {
 Then("determinant\\(A) = {int}", function (expected: number) {
     expect(Matrices.determinant(this.A)).equals(expected);
 });
+
+Then('submatrix\\(A, {int}, {int}) is the following {int}x{int} matrix:', function (row: number, col: number, width: number, height: number, table: TableDefinition) {
+    expect(Matrices.submatrix(this.A, row, col)).to.eql(Matrices.matrix(table.raw()));
+});
