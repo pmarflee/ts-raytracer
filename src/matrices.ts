@@ -60,6 +60,19 @@ export class Matrices {
             result[3][0]);
     }
 
+    static transpose(m: Matrix) : Matrix {
+        let t : Matrix = Array.from({ length: m.length }, () => 
+            Array.from({ length: m[0].length }, () => 0));
+
+        for (let row: number = 0; row < m.length; row++) {
+            for (let col: number = 0; col < m[row].length; col++) {
+                t[col][row] = m[row][col];
+            }
+        }
+        
+        return t;
+    }
+
     static readonly identity : Matrix = [
         [ 1, 0, 0, 0 ],
         [ 0, 1, 0, 0 ],

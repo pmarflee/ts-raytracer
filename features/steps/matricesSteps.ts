@@ -20,6 +20,10 @@ Given("b <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number
     this.b = Tuples.tuple(x, y, z, w);
 });
 
+Given("A <- transpose\\(identity_matrix)", function () {
+    this.A = Matrices.transpose(Matrices.identity);
+});
+
 Then("M[{int},{int}] = {float}", function (y: number, x: number, expected: number) {
     expect(this.M[y][x]).to.be.equal(expected);
 });
@@ -47,6 +51,13 @@ Then("A * identity_matrix = A", function () {
 });
 
 Then("identity_matrix * a = a", function () {
-    console.log(this.a);
     expect(Matrices.multiplyByTuple(Matrices.identity, this.a)).to.be.eql(this.a);
+});
+
+Then("transpose\\(A) is the following matrix", function (table: TableDefinition) {
+    expect(Matrices.transpose(this.A)).to.eql(Matrices.matrix(table.raw()));
+});
+
+Then("A = identity_matrix", function () {
+    expect(this.A).to.eql(Matrices.identity);
 });
