@@ -85,3 +85,7 @@ Then("submatrix\\(A, {int}, {int}) is the following {int}x{int} matrix:", functi
 Then("minor\\(A, {int}, {int}) = {int}", function (row: number, col: number, expected: number) {
     expect(Matrices.minor(this.A, row, col)).to.equal(expected);
 });
+
+Then("cofactor\\(A, {int}, {int}) = {int}", function (row: number, col: number, expected: number) {
+    expect(Matrices.cofactor(this.A, row, col)).to.equal(expected);
+});

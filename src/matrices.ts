@@ -97,6 +97,11 @@ export class Matrices {
         return Matrices.determinant(Matrices.submatrix(m, row, col));
     }
 
+    static cofactor(m: Matrix, row: number, col: number) : number {
+        let minor = Matrices.minor(m, row, col);
+        return row + col % 2 > 0 ? -minor : minor;
+    }
+
     static readonly identity : Matrix = [
         [ 1, 0, 0, 0 ],
         [ 0, 1, 0, 0 ],
