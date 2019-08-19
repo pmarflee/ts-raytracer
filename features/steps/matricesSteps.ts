@@ -28,6 +28,10 @@ Given("A <- transpose\\(identity_matrix)", function () {
     this.A = Matrices.transpose(Matrices.identity);
 });
 
+Given("B <- submatrix\\(A, {int}, {int})", function (row: number, col: number) {
+    this.B = Matrices.submatrix(this.A, row, col);
+});
+
 Then("M[{int},{int}] = {float}", function (y: number, x: number, expected: number) {
     expect(this.M[y][x]).to.be.equal(expected);
 });
@@ -70,6 +74,14 @@ Then("determinant\\(A) = {int}", function (expected: number) {
     expect(Matrices.determinant(this.A)).equals(expected);
 });
 
+Then("determinant\\(B) = {int}", function (expected: number) {
+    expect(Matrices.determinant(this.B)).equals(expected);
+});
+
 Then('submatrix\\(A, {int}, {int}) is the following {int}x{int} matrix:', function (row: number, col: number, width: number, height: number, table: TableDefinition) {
     expect(Matrices.submatrix(this.A, row, col)).to.eql(Matrices.matrix(table.raw()));
+});
+
+Then("minor\\(A, {int}, {int}) = {int}", function (row: number, col: number, expected: number) {
+    expect(Matrices.minor(this.A, row, col)).to.equal(expected);
 });

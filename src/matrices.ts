@@ -93,6 +93,10 @@ export class Matrices {
         return s;
     }
 
+    static minor(m: Matrix, row: number, col: number) : number {
+        return Matrices.determinant(Matrices.submatrix(m, row, col));
+    }
+
     static readonly identity : Matrix = [
         [ 1, 0, 0, 0 ],
         [ 0, 1, 0, 0 ],
