@@ -74,7 +74,11 @@ export class Matrices {
     }
 
     static determinant(m: Matrix) : number {
-        return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+        return m.length === 2
+            ? m[0][0] * m[1][1] - m[0][1] * m[1][0]
+            : [...Array(m.length).keys()]
+                .reduce((acc, col) => 
+                    acc + m[0][col] * Matrices.cofactor(m, 0, col), 0);
     };
 
     static submatrix(m: Matrix, rowToRemove: number, colToRemove: number) : Matrix {
