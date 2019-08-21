@@ -106,6 +106,10 @@ export class Matrices {
         return row + col % 2 > 0 ? -minor : minor;
     }
 
+    static isInvertible(m: Matrix) : boolean {
+        return Matrices.determinant(m) !== 0;
+    }
+
     static readonly identity : Matrix = [
         [ 1, 0, 0, 0 ],
         [ 0, 1, 0, 0 ],

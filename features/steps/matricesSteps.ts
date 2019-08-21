@@ -89,3 +89,11 @@ Then("minor\\(A, {int}, {int}) = {int}", function (row: number, col: number, exp
 Then("cofactor\\(A, {int}, {int}) = {int}", function (row: number, col: number, expected: number) {
     expect(Matrices.cofactor(this.A, row, col)).to.equal(expected);
 });
+
+Then("A is invertible", function () {
+    expect(Matrices.isInvertible(this.A)).to.be.true;
+});
+
+Then("A is not invertible", function () {
+    expect(Matrices.isInvertible(this.A)).to.be.false;
+});
