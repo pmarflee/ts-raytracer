@@ -1,4 +1,4 @@
-import { Tuples, Tuple } from "./tuples";
+import Color from "./color";
 import * as NodeCanvas from "canvas";
 import fs from 'fs';
 
@@ -7,7 +7,7 @@ export default class Canvas {
     private static readonly maxColorValue = 255;
     private static readonly maxLineLength = 70;
 
-    private readonly data: Tuple[][];
+    private readonly data: Color[][];
 
     get width(): number {
         return this.data[0].length;
@@ -23,16 +23,16 @@ export default class Canvas {
         for (let i: number = 0; i < height; i++) {
             this.data[i] = [];
             for (let j: number = 0; j < width; j++) {
-                this.data[i][j] = Tuples.color(0, 0, 0);
+                this.data[i][j] = Color.fromRGB(0, 0, 0);
             }
         }
     }
 
-    public readPixel(x: number, y: number): Tuple {
+    public readPixel(x: number, y: number): Color {
         return this.data[y][x];
     }
 
-    public writePixel(x: number, y: number, c: Tuple): void {
+    public writePixel(x: number, y: number, c: Color): void {
         this.data[y][x] = c;
     }
 
@@ -73,11 +73,11 @@ export default class Canvas {
         }
     }
 
-    private * generatePPMPixelDataLine(lineData: Tuple[]): IterableIterator<number> {
+    private * generatePPMPixelDataLine(lineData: Color[]): IterableIterator<number> {
         for (let i: number = 0; i < this.width; i++) {
-            for (let j: number = 0; j < 3; j++) {
-                yield this.clamp(this.scale(lineData[i][j]));
-            }
+            yield this.clamp(this.scale(lineData[i].red));
+            yield this.clamp(this.scale(lineData[i].green));
+            yield this.clamp(this.scale(lineData[i].blue));
         }
     }
 
@@ -115,12 +115,12 @@ export default class Canvas {
         return value;
     }
 
-    private drawPixel(imageData: NodeCanvas.ImageData, x: number, y: number, color: Tuple): void {
+    private drawPixel(imageData: NodeCanvas.ImageData, x: number, y: number, color: Color): void {
         let index = (x + y * this.width) * 4; 
 
-        imageData.data[index + 0] = color[0];
-        imageData.data[index + 1] = color[1];
-        imageData.data[index + 2] = color[2];
+        imageData.data[index + 0] = color.red;
+        imageData.data[index + 1] = color.green;
+        imageData.data[index + 2] = color.blue;
         imageData.data[index + 3] = 255;
     }
 }

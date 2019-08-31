@@ -3,7 +3,7 @@ import { expect } from "chai";
 import chaiAlmost from "chai-almost";
 import chaiString from "chai-string";
 import { Given, When, Then } from "cucumber";
-import { Tuple, Tuples } from "../../src/tuples";
+import Color from "../../src/color";
 import Canvas from "../../src/canvas";
 
 chai.use(chaiAlmost(0.00001));
@@ -22,7 +22,7 @@ Then("c.height = {int}", function (expected: number) {
 });
 
 Then("every pixel of c is color\\({int}, {int}, {int})", function (red: number, green: number, blue: number) {
-    let expected = Tuples.color(0, 0, 0);
+    let expected = Color.fromRGB(0, 0, 0);
 
     for (let i = 0; i < this.canvas.height; i++) {
         for (let j = 0; j < this.canvas.width; j++) {
@@ -32,7 +32,7 @@ Then("every pixel of c is color\\({int}, {int}, {int})", function (red: number, 
 });
 
 Given("red <- color\\({int}, {int}, {int})", function (r: number, g: number, b: number) {
-    this.red = Tuples.color(r, g, b);
+    this.red = Color.fromRGB(r, g, b);
 });
 
 When("write_pixel\\(c, {int}, {int}, red)", function (x: number, y: number) {
@@ -54,7 +54,7 @@ Then("lines {int}-{int} of ppm are", function (from: number, to: number, expecte
 });
 
 Given("c3 <- color\\({float}, {float}, {float})", function (r: number, g: number, b: number) {
-    this.c3 = Tuples.color(r, g, b);
+    this.c3 = Color.fromRGB(r, g, b);
 });
 
 When("write_pixel\\(c, {int}, {int}, c1)", function (x: number, y: number) {
@@ -72,7 +72,7 @@ When("write_pixel\\(c, {int}, {int}, c3)", function (x: number, y: number) {
 Given("every pixel of c is set to color\\({float}, {float}, {float})", function (red: number, green: number, blue: number) {
     for (let i = 0; i < this.canvas.height; i++) {
         for (let j = 0; j < this.canvas.width; j++) {
-            this.canvas.writePixel(j, i, Tuples.color(red, green, blue));
+            this.canvas.writePixel(j, i, Color.fromRGB(red, green, blue));
         }
     }
 });

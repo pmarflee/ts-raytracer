@@ -1,6 +1,7 @@
-import { Tuple } from "../../src/tuples";
+import Tuple from "../../src/tuple";
 import Canvas from "../../src/canvas";
-import { Matrix } from "../../src/matrices";
+import Matrix from "../../src/matrix";
+import Color from "../../src/color";
  
 declare module "cucumber" {
     interface World {
@@ -17,11 +18,11 @@ declare module "cucumber" {
         v2: Tuple,
         zero: Tuple,
         norm: Tuple,
-        c: Tuple,
-        c1: Tuple,
-        c2: Tuple,
-        c3: Tuple,
-        red: Tuple,
+        c: Color,
+        c1: Color,
+        c2: Color,
+        c3: Color,
+        red: Color,
         canvas: Canvas,
         ppm: string,
         M: Matrix,
