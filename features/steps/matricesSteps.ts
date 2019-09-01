@@ -112,3 +112,7 @@ Then("B[{int},{int}] = {int} / {int}", function (y: number, x: number, numerator
 Then("B is the following 4x4 matrix:", function (table: TableDefinition) {
     expect(this.B).to.almost.eql(Matrix.fromTable(table.raw()));
 });
+
+Then("inverse\\(A) is the following 4x4 matrix:", function (table: TableDefinition) {
+    expect(this.A.inverse()).to.almost.eql(Matrix.fromTable(table.raw()));
+});
