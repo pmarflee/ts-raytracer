@@ -53,8 +53,4 @@ export default class Tuple {
             this.z * other.x - this.x * other.z, 
             this.x * other.y - this.y * other.x);
     }
-
-    public toString = () : string => {
-        return `{x: ${this.x}, y: ${this.y}, z: ${this.z}, w: ${this.w}}`;
-    }
 }
