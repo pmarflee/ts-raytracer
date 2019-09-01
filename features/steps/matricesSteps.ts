@@ -1,8 +1,11 @@
 import chai from "chai";
 import { expect } from "chai";
+import chaiAlmost from "chai-almost";
 import { Given, When, Then, TableDefinition } from "cucumber";
 import Matrix from "../../src/matrix";
 import Tuple from "../../src/tuple";
+
+chai.use(chaiAlmost(0.00001));
 
 Given("the following {int}x{int} matrix M:", function (width: number, height: number, table: TableDefinition) {
     this.M = Matrix.fromTable(table.raw());
@@ -30,6 +33,10 @@ Given("A <- transpose\\(identity_matrix)", function () {
 
 Given("B <- submatrix\\(A, {int}, {int})", function (row: number, col: number) {
     this.B = this.A.submatrix(row, col);
+});
+
+Given("B <- inverse\\(A)", function () {
+    this.B = this.A.inverse();
 });
 
 Then("M[{int},{int}] = {float}", function (y: number, x: number, expected: number) {
@@ -96,4 +103,12 @@ Then("A is invertible", function () {
 
 Then("A is not invertible", function () {
     expect(this.A.isInvertible).to.be.false;
+});
+
+Then("B[{int},{int}] = {int} / {int}", function (y: number, x: number, numerator: number, denominator: number) {
+    expect(this.B.data[y][x]).to.equal(numerator / denominator);
+});
+
+Then("B is the following 4x4 matrix:", function (table: TableDefinition) {
+    expect(this.B).to.almost.eql(Matrix.fromTable(table.raw()));
 });

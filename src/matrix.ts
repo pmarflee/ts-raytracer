@@ -109,11 +109,29 @@ export default class Matrix {
 
     public cofactor(row: number, col: number) {
         let minor = this.minor(row, col);
-        return row + col % 2 > 0 ? -minor : minor;
+        return (row + col) % 2 > 0 ? -minor : minor;
     }
 
     public get isInvertible() {
         return this.determinant !== 0;
+    }
+
+    public inverse() {
+        if (!this.isInvertible) {
+            throw new Error("Matrix is not invertible");
+        }
+
+        let determinant = this.determinant,
+            data = Array.from({ length: this.data.length }, () => 
+            Array.from({ length: this.data.length }, () => 0));
+
+        for (let row = 0; row < this.data.length; row++) {
+            for (let col = 0; col < this.data.length; col++) {
+                data[col][row] = this.cofactor(row, col) / determinant;
+            }
+        }
+
+        return new Matrix(data);
     }
 
     public static readonly identity : Matrix = new Matrix([
