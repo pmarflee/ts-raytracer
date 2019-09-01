@@ -27,6 +27,7 @@ declare module "cucumber" {
         ppm: string,
         M: Matrix,
         A: Matrix,
-        B: Matrix
+        B: Matrix,
+        C: Matrix
     }
 }

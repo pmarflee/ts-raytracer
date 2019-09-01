@@ -23,6 +23,10 @@ Given("the following matrix B:", function (table: TableDefinition) {
     this.B = Matrix.fromTable(table.raw());
 });
 
+Given("the following 4x4 matrix B:", function (table: TableDefinition) {
+    this.B = Matrix.fromTable(table.raw());
+});
+
 Given("b <- tuple\\({int}, {int}, {int}, {int})", function (x: number, y: number, z: number, w: number) {
     this.b = new Tuple(x, y, z, w);
 });
@@ -37,6 +41,10 @@ Given("B <- submatrix\\(A, {int}, {int})", function (row: number, col: number) {
 
 Given("B <- inverse\\(A)", function () {
     this.B = this.A.inverse();
+});
+
+Given("C <- A * B", function () {
+    this.C = this.A.multiply(this.B);
 });
 
 Then("M[{int},{int}] = {float}", function (y: number, x: number, expected: number) {
@@ -115,4 +123,8 @@ Then("B is the following 4x4 matrix:", function (table: TableDefinition) {
 
 Then("inverse\\(A) is the following 4x4 matrix:", function (table: TableDefinition) {
     expect(this.A.inverse()).to.almost.eql(Matrix.fromTable(table.raw()));
+});
+
+Then("C * inverse\\(B) = A", function () {
+    expect(this.C.multiply(this.B.inverse())).to.almost.eql(this.A);
 });
