@@ -15,6 +15,10 @@ Given("inv <- inverse\\(transform)", function () {
     this.inv = this.transform.inverse();
 });
 
+Given("transform <- scaling\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.transform = Matrix.scaling(x, y, z);
+});
+
 Then("transform * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
     expect(this.transform.multiply(this.p)).to.eql(Tuple.point(x, y, z));
 });
@@ -26,3 +30,11 @@ Then("inv * p = point\\({int}, {int}, {int})", function (x: number, y: number, z
 Then("transform * v = v", function () {                                
     expect(this.transform.multiply(this.v)).to.eql(this.v);
 });                                                                    
+
+Then("transform * v = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(this.transform.multiply(this.v)).to.eql(Tuple.vector(x, y, z));
+});
+
+Then("inv * v = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(this.inv.multiply(this.v)).to.eql(Tuple.vector(x, y, z));
+});

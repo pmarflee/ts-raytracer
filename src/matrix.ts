@@ -27,6 +27,15 @@ export default class Matrix {
         return m;
     }
 
+    public static scaling(x: number, y: number, z: number) {
+        var m = Matrix.identity;
+        m.data[0][0] = x;
+        m.data[1][1] = y;
+        m.data[2][2] = z;
+
+        return m;
+    }
+
     public compare(other: Matrix) {
         if (this.data.length !== other.data.length) {
             return false;
