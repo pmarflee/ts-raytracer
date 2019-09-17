@@ -36,6 +36,19 @@ export default class Matrix {
         return m;
     }
 
+    public static rotation_x(radians: number) {
+        var m = Matrix.identity,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians);
+
+        m.data[1][1] = cos;
+        m.data[1][2] = -sin;
+        m.data[2][1] = sin;
+        m.data[2][2] = cos;
+
+        return m;
+    }
+
     public compare(other: Matrix) {
         if (this.data.length !== other.data.length) {
             return false;

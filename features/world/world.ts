@@ -30,6 +30,8 @@ declare module "cucumber" {
         B: Matrix,
         C: Matrix,
         transform: Matrix,
-        inv: Matrix
+        inv: Matrix,
+        full_quarter: Matrix,
+        half_quarter: Matrix
     }
 }
