@@ -23,6 +23,10 @@ Given("half_quarter <- rotation_x\\(π \/ {int})", function (v: number) {
     this.half_quarter = Matrix.rotation_x(Math.PI / v);
 });
 
+Given("full_quarter <- rotation_x\\(π \/ {int})", function (v: number) {
+    this.full_quarter = Matrix.rotation_x(Math.PI / v);
+});
+
 Given("full_quarter <- rotation_y\\(π \/ {int})", function (v: number) {
     this.full_quarter = Matrix.rotation_y(Math.PI / v);
 });
@@ -31,8 +35,12 @@ Given("half_quarter <- rotation_y\\(π \/ {int})", function (v: number) {
     this.half_quarter = Matrix.rotation_y(Math.PI / v);
 });
 
-Given("full_quarter <- rotation_x\\(π \/ {int})", function (v: number) {
-    this.full_quarter = Matrix.rotation_x(Math.PI / v);
+Given("full_quarter <- rotation_z\\(π \/ {int})", function (v: number) {
+    this.full_quarter = Matrix.rotation_z(Math.PI / v);
+});
+
+Given("half_quarter <- rotation_z\\(π \/ {int})", function (v: number) {
+    this.half_quarter = Matrix.rotation_z(Math.PI / v);
 });
 
 Then("transform * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
@@ -61,6 +69,10 @@ Then("half_quarter * p = point\\({int}, √{int} \/ {int}, √{int} \/ {int})", 
 
 Then("half_quarter * p = point\\(√{int} \/ {int}, {int}, √{int} \/ {int})", function (x1: number, x2: number, y: number, z1: number, z2: number) {
     expect(this.half_quarter.multiply(this.p)).to.almost.eql(Tuple.point(Math.sqrt(x1) / x2, y, Math.sqrt(z1) / z2));
+});
+
+Then("half_quarter * p = point\\(√{int} \/ {int}, √{int} \/ {int}, {int})", function (x1: number, x2: number, y1: number, y2: number, z: number) {
+    expect(this.half_quarter.multiply(this.p)).to.almost.eql(Tuple.point(Math.sqrt(x1) / x2, Math.sqrt(y1) / y2, z));
 });
 
 Then("full_quarter * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
