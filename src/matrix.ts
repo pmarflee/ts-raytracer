@@ -18,6 +18,15 @@ export default class Matrix {
         return new Matrix(data);
     }
 
+    public static translation(x: number, y: number, z: number) {
+        var m = Matrix.identity;
+        m.data[0][3] += x;
+        m.data[1][3] += y;
+        m.data[2][3] += z;
+
+        return m;
+    }
+
     public compare(other: Matrix) {
         if (this.data.length !== other.data.length) {
             return false;
@@ -134,10 +143,12 @@ export default class Matrix {
         return new Matrix(data);
     }
 
-    public static readonly identity : Matrix = new Matrix([
-        [ 1, 0, 0, 0 ],
-        [ 0, 1, 0, 0 ],
-        [ 0, 0, 1, 0 ],
-        [ 0, 0, 0, 1 ] 
-    ]);
+    public static get identity() {
+        return new Matrix([
+            [ 1, 0, 0, 0 ],
+            [ 0, 1, 0, 0 ],
+            [ 0, 0, 1, 0 ],
+            [ 0, 0, 0, 1 ] 
+        ]);
+    }
 }

@@ -47,6 +47,14 @@ Given("C <- A * B", function () {
     this.C = this.A.multiply(this.B);
 });
 
+Given("transform <- translation\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.transform = Matrix.translation(x, y, z);
+});
+
+Given("inv <- inverse\\(transform)", function () {
+    this.inv = this.transform.inverse();
+})
+
 Then("M[{int},{int}] = {float}", function (y: number, x: number, expected: number) {
     expect(this.M.data[y][x]).to.be.equal(expected);
 });
@@ -128,3 +136,15 @@ Then("inverse\\(A) is the following 4x4 matrix:", function (table: TableDefiniti
 Then("C * inverse\\(B) = A", function () {
     expect(this.C.multiply(this.B.inverse())).to.almost.eql(this.A);
 });
+
+Then("transform * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(this.transform.multiply(this.p)).to.eql(Tuple.point(x, y, z));
+});
+
+Then("inv * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(this.inv.multiply(this.p)).to.eql(Tuple.point(x, y, z));
+});
+
+Then("transform * v = v", function () {                                
+    expect(this.transform.multiply(this.v)).to.eql(this.v);
+});                                                                    

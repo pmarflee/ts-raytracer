@@ -28,6 +28,8 @@ declare module "cucumber" {
         M: Matrix,
         A: Matrix,
         B: Matrix,
-        C: Matrix
+        C: Matrix,
+        transform: Matrix,
+        inv: Matrix
     }
 }
