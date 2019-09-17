@@ -43,6 +43,10 @@ Given("half_quarter <- rotation_z\\(π \/ {int})", function (v: number) {
     this.half_quarter = Matrix.rotation_z(Math.PI / v);
 });
 
+Given('transform <- shearing\\({int}, {int}, {int}, {int}, {int}, {int})', function (xy: number, xz: number, yx: number, yz: number, zx: number, zy: number) {
+    this.transform = Matrix.shearing(xy, xz, yx, yz, zx, zy);
+});
+
 Then("transform * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
     expect(this.transform.multiply(this.p)).to.eql(Tuple.point(x, y, z));
 });
@@ -71,8 +75,8 @@ Then("half_quarter * p = point\\(√{int} \/ {int}, {int}, √{int} \/ {int})", 
     expect(this.half_quarter.multiply(this.p)).to.almost.eql(Tuple.point(Math.sqrt(x1) / x2, y, Math.sqrt(z1) / z2));
 });
 
-Then("half_quarter * p = point\\(√{int} \/ {int}, √{int} \/ {int}, {int})", function (x1: number, x2: number, y1: number, y2: number, z: number) {
-    expect(this.half_quarter.multiply(this.p)).to.almost.eql(Tuple.point(Math.sqrt(x1) / x2, Math.sqrt(y1) / y2, z));
+Then("half_quarter * p = point\\(-√{int} \/ {int}, √{int} \/ {int}, {int})", function (x1: number, x2: number, y1: number, y2: number, z: number) {
+    expect(this.half_quarter.multiply(this.p)).to.almost.eql(Tuple.point(-(Math.sqrt(x1) / x2), Math.sqrt(y1) / y2, z));
 });
 
 Then("full_quarter * p = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {

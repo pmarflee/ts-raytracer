@@ -75,6 +75,19 @@ export default class Matrix {
         return m;
     }
 
+    public static shearing(xy: number, xz: number, yx: number, yz: number, zx: number, zy: number) {
+        var m = Matrix.identity;
+
+        m.data[0][1] = xy;
+        m.data[0][2] = xz;
+        m.data[1][0] = yx;
+        m.data[1][2] = yz;
+        m.data[2][0] = zx;
+        m.data[2][1] = zy;
+
+        return m;
+    }
+
     public compare(other: Matrix) {
         if (this.data.length !== other.data.length) {
             return false;
