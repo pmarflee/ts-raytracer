@@ -13,6 +13,8 @@ declare module "cucumber" {
         p: Tuple,
         p1: Tuple,
         p2: Tuple,
+        p3: Tuple,
+        p4: Tuple,
         v: Tuple,
         v1: Tuple,
         v2: Tuple,
@@ -32,6 +34,7 @@ declare module "cucumber" {
         transform: Matrix,
         inv: Matrix,
         full_quarter: Matrix,
-        half_quarter: Matrix
+        half_quarter: Matrix,
+        T: Matrix
     }
 }

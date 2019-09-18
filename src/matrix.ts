@@ -38,9 +38,9 @@ export default class Matrix {
 
     public static rotation_x(radians: number) {
         var m = Matrix.identity,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
-
+            cos = Math.cos(radians),
+            sin = Math.sin(radians);
+            
         m.data[1][1] = cos;
         m.data[1][2] = -sin;
         m.data[2][1] = sin;
@@ -51,8 +51,8 @@ export default class Matrix {
 
     public static rotation_y(radians: number) {
         var m = Matrix.identity,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
+            cos = Math.cos(radians),
+            sin = Math.sin(radians);
 
         m.data[0][0] = cos;
         m.data[0][2] = sin;
@@ -64,8 +64,8 @@ export default class Matrix {
 
     public static rotation_z(radians: number) {
         var m = Matrix.identity,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
+            cos = Math.cos(radians),
+            sin = Math.sin(radians);
 
         m.data[0][0] = cos;
         m.data[0][1] = -sin;
@@ -111,7 +111,9 @@ export default class Matrix {
     public multiply(matrix: Matrix) : Matrix;
     public multiply(tuple: Tuple) : Tuple;
     multiply(v: Matrix | Tuple) : Matrix | Tuple {
-        return v instanceof Matrix ? this.multiplyByMatrix(<Matrix>v) : this.multiplyByTuple(<Tuple>v);
+        return v instanceof Matrix 
+            ? this.multiplyByMatrix(v) 
+            : this.multiplyByTuple(v);
     }
 
     private multiplyByMatrix(other: Matrix) {
