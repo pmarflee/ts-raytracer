@@ -26,7 +26,7 @@ export default class Sphere {
                 values.push(distance);
             }
             distance++;
-        } while (values.length < 2 && distance <= 15);
+        } while (values.length < 2);
 
         return values;
     }
