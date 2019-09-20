@@ -8,8 +8,16 @@ Scenario: Creating and querying a ray
     And r.direction = direction
 
 Scenario: Computing a point from a distance
-  Given r <- ray(point 2, 3, 4, vector 1, 0, 0)
+  Given r <- ray(point 2 3 4, vector 1 0 0)
   Then  position(r, 0.0) = point(2.0, 3.0, 4.0)
     And position(r, 1.0) = point(3.0, 3.0, 4.0)
     And position(r, -1.0) = point(1.0, 3.0, 4.0)
     And position(r, 2.5) = point(4.5, 3.0, 4.0)
+
+Scenario: A ray intersects a sphere at two points
+  Given r <- ray(point 0 0 -5, vector 0 0 1)
+    And s <- sphere
+  When  xs <- intersect(s, r)
+  Then  xs.count = 2
+    And xs[0] = 4.0
+    And xs[1] = 6.0

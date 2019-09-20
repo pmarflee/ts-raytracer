@@ -3,6 +3,7 @@ import Canvas from "../../src/canvas";
 import Matrix from "../../src/matrix";
 import Color from "../../src/color";
 import Ray from "../../src/ray";
+import Sphere from "../../src/sphere";
  
 declare module "cucumber" {
     interface World {
@@ -39,6 +40,8 @@ declare module "cucumber" {
         full_quarter: Matrix,
         half_quarter: Matrix,
         T: Matrix,
-        r: Ray
+        r: Ray,
+        s: Sphere,
+        xs: number[]
     }
 }
