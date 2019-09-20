@@ -2,3 +2,5 @@ node_modules/
 
 features/**/*.js
 src/**/*.js
+*.png
+*.ppm

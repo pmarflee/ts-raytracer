@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "tsc && cucumber-js -p default",
-    "cannon": "tsc && ts-node.cmd src/cannon.ts"
+    "cannon": "tsc && ts-node.cmd src/cannon.ts",
+    "clock": "tsc && ts-node.cmd src/clock.ts"
   },
   "keywords": [],
   "author": "",
