@@ -2,6 +2,7 @@ import Tuple from "../../src/tuple";
 import Canvas from "../../src/canvas";
 import Matrix from "../../src/matrix";
 import Color from "../../src/color";
+import Ray from "../../src/ray";
  
 declare module "cucumber" {
     interface World {
@@ -20,6 +21,8 @@ declare module "cucumber" {
         v2: Tuple,
         zero: Tuple,
         norm: Tuple,
+        origin: Tuple,
+        direction: Tuple,
         c: Color,
         c1: Color,
         c2: Color,
@@ -35,6 +38,7 @@ declare module "cucumber" {
         inv: Matrix,
         full_quarter: Matrix,
         half_quarter: Matrix,
-        T: Matrix
+        T: Matrix,
+        r: Ray
     }
 }
