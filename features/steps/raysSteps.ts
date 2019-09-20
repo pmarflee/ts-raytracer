@@ -16,6 +16,10 @@ Given("direction <- vector\\({int}, {int}, {int})", function (x: number, y: numb
     this.direction = Tuple.vector(x, y, z);
 });
 
+Given("r <- ray\\(point {int}, {int}, {int}, vector {int}, {int}, {int})", function (pX: number, pY: number, pZ: number, vX: number, vY: number, vZ: number) {
+    this.r = new Ray(Tuple.point(pX, pY, pZ), Tuple.vector(vX, vY, vZ));
+});
+
 When("r <- ray\\(origin, direction)", function () {
     this.r = new Ray(this.origin, this.direction);
 });
@@ -26,4 +30,8 @@ Then("r.origin = origin", function () {
 
 Then("r.direction = direction", function () {
     this.r.direction === this.direction;
+});
+
+Then("position\\(r, {float}) = point\\({float}, {float}, {float})", function (t: number, x: number, y: number, z: number) {
+    this.r.position(t) === Tuple.point(x, y, z);
 });
