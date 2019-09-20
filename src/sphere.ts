@@ -17,12 +17,14 @@ export default class Sphere {
 
         do {
             let position = ray.position(distance);
-            if (this.position.x - this.radius === position.x || 
-                this.position.x + this.radius === position.x ||
-                this.position.y - this.radius === position.y ||
-                this.position.y + this.radius === position.y ||
-                this.position.z - this.radius === position.z ||
-                this.position.z + this.radius === position.z) {
+            if (this.position.y === position.y && 
+                (this.position.z - this.radius === position.z || 
+                this.position.z + this.radius === position.z)) {
+                values.push(distance);
+            } else if ((this.position.y - this.radius === position.y ||
+                        this.position.y + this.radius === position.y) &&
+                        this.position.z == position.z) {
+                values.push(distance);
                 values.push(distance);
             }
             distance++;
