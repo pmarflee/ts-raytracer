@@ -43,7 +43,9 @@ declare module "cucumber" {
         T: Matrix,
         r: Ray,
         s: Sphere,
-        xs: number[],
-        i: Intersection
+        xs: Intersection[],
+        i: Intersection,
+        i1: Intersection,
+        i2: Intersection,
     }
 }

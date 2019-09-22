@@ -26,6 +26,14 @@ Given("s <- sphere", function () {
     this.s = new Sphere();
 });
 
+Given("i1 <- intersection\\({float}, s)", function (t: number) {
+    this.i1 = new Intersection(t, this.s);
+})
+
+Given("i2 <- intersection\\({float}, s)", function (t: number) {
+    this.i2 = new Intersection(t, this.s);
+})
+
 When("r <- ray\\(origin, direction)", function () {
     this.r = new Ray(this.origin, this.direction);
 });
@@ -37,6 +45,10 @@ When("xs <- intersect\\(s, r)", function () {
 When("i <- intersection\\({float}, s)", function (t: number) {              
     this.i = new Intersection(t, this.s);
 });                                                                    
+
+When("xs <- intersections\\(i1, i2)", function () {
+    this.xs = [this.i1, this.i2];
+});
 
 Then("r.origin = origin", function () {
     expect(this.r.origin).to.eql(this.origin);
@@ -54,14 +66,18 @@ Then("xs.count = {int}", function (count: number) {
     expect(this.xs.length).to.equal(count);
 });
 
-Then("xs[{int}] = {float}", function (index: number, distance: number) {
-    expect(this.xs[index]).to.equal(distance);
-});
-
 Then("i.t = {float}", function (expected: number) {
     expect(this.i.t).to.equal(expected);
 });
 
 Then("i.object = s", function () {
     expect(this.i.object).to.equal(this.s);
+});
+
+Then("xs[{int}].t = {float}", function (index: number, expected: number) {
+    expect(this.xs[index].t).to.equal(expected);
+});
+
+Then("xs[{int}].object = s", function (index: number) {
+    expect(this.xs[index].object).to.equal(this.s);
 });

@@ -1,5 +1,6 @@
 import Tuple from "./tuple";
 import Sphere from "./sphere";
+import Intersection from "./intersection";
 
 export default class Ray {
 
@@ -23,6 +24,6 @@ export default class Ray {
         let t1 = (-b - Math.sqrt(discriminant)) / (2 * a),
             t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 
-        return [t1, t2];
+        return [new Intersection(t1, sphere), new Intersection(t2, sphere)];
     }
 }
