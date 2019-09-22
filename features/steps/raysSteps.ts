@@ -6,6 +6,7 @@ import Matrix from "../../src/matrix";
 import Tuple from "../../src/tuple";
 import Ray from "../../src/ray";
 import Sphere from "../../src/sphere";
+import Intersection from "../../src/intersection";
 
 chai.use(chaiAlmost(0.00001));
 
@@ -33,6 +34,10 @@ When("xs <- intersect\\(s, r)", function () {
     this.xs = this.r.intersect(this.s);
 });
 
+When("i <- intersection\\({float}, s)", function (t: number) {              
+    this.i = new Intersection(t, this.s);
+});                                                                    
+
 Then("r.origin = origin", function () {
     expect(this.r.origin).to.eql(this.origin);
 });
@@ -51,4 +56,12 @@ Then("xs.count = {int}", function (count: number) {
 
 Then("xs[{int}] = {float}", function (index: number, distance: number) {
     expect(this.xs[index]).to.equal(distance);
+});
+
+Then("i.t = {float}", function (expected: number) {
+    expect(this.i.t).to.equal(expected);
+});
+
+Then("i.object = s", function () {
+    expect(this.i.object).to.equal(this.s);
 });

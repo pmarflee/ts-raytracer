@@ -51,3 +51,9 @@ Scenario: A sphere is behind a ray
   Then  xs.count = 2
     And xs[0] = -6.0
     And xs[1] = -4.0
+  
+Scenario: An intersection encapsulates t and object
+  Given s <- sphere
+  When  i <- intersection(3.5, s)
+  Then  i.t = 3.5
+    And i.object = s

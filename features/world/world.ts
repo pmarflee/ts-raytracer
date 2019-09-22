@@ -4,6 +4,7 @@ import Matrix from "../../src/matrix";
 import Color from "../../src/color";
 import Ray from "../../src/ray";
 import Sphere from "../../src/sphere";
+import Intersection from "../../src/intersection";
  
 declare module "cucumber" {
     interface World {
@@ -42,6 +43,7 @@ declare module "cucumber" {
         T: Matrix,
         r: Ray,
         s: Sphere,
-        xs: number[]
+        xs: number[],
+        i: Intersection
     }
 }

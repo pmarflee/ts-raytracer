@@ -1,6 +1,7 @@
 import Tuple from "./tuple";
+import Entity from "./entity";
 
-export default class Sphere {
+export default class Sphere implements Entity {
 
     public readonly id: number;
 
