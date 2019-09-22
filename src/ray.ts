@@ -12,7 +12,8 @@ export default class Ray {
     }
 
     public intersect(sphere: Sphere) {
-        let distance = 0,
+        let difference = sphere.position.z - sphere.radius - this.origin.z,
+            distance = difference > 0 ? 0 : difference,
             intersections: number[] = [],
             offsets = [[0, -1], [1, 0], [0, 1], [-1, 0]],
             position: Tuple;
