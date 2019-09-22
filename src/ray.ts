@@ -12,27 +12,17 @@ export default class Ray {
     }
 
     public intersect(sphere: Sphere) {
-        let difference = sphere.position.z - sphere.radius - this.origin.z,
-            distance = difference > 0 ? 0 : difference,
-            intersections: number[] = [],
-            offsets = [[0, -1], [1, 0], [0, 1], [-1, 0]],
-            position: Tuple;
-            
-        do {
-            position = this.position(distance);
-            for (let offset of offsets) {
-                if (position.y === sphere.position.y + offset[0] &&
-                    position.z === sphere.position.z + offset[1]) {
-                        intersections.push(distance);
-                    }
-            }
-            distance++;
-        } while (position.z <= sphere.position.z + sphere.radius);
+        let sphereToRay = this.origin.subtract(sphere.position),
+            a = this.direction.dot(this.direction),
+            b = 2 * this.direction.dot(sphereToRay),
+            c = sphereToRay.dot(sphereToRay) - 1,
+            discriminant = (b ** 2) - 4 * a * c;
 
-        if (intersections.length === 1) {
-            intersections.push(intersections[0]);
-        }
+        if (discriminant < 0) return [];
 
-        return intersections;
+        let t1 = (-b - Math.sqrt(discriminant)) / (2 * a),
+            t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
+
+        return [t1, t2];
     }
 }
