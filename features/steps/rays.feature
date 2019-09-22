@@ -29,3 +29,9 @@ Scenario: A ray intersects a sphere at a tangent
   Then  xs.count = 2
     And xs[0] = 5.0
     And xs[1] = 5.0
+
+Scenario: A ray misses a sphere
+  Given r <- ray(point 0 2 -5, vector 0 0 1)
+    And s <- sphere
+  When  xs <- intersect(s, r)
+  Then  xs.count = 0
