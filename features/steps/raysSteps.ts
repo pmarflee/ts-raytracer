@@ -30,7 +30,7 @@ When("r <- ray\\(origin, direction)", function () {
 });
 
 When("xs <- intersect\\(s, r)", function () {
-    this.xs = this.s.intersect(this.r);
+    this.xs = this.r.intersect(this.s);
 });
 
 Then("r.origin = origin", function () {
