@@ -27,11 +27,11 @@ Given("s <- sphere", function () {
 });
 
 Given("i1 <- intersection\\({float}, s)", function (t: number) {
-    this.i1 = new Intersection(t, this.s);
+    this.i1 = { t: t, object: this.s };
 })
 
 Given("i2 <- intersection\\({float}, s)", function (t: number) {
-    this.i2 = new Intersection(t, this.s);
+    this.i2 = { t: t, object: this.s };
 })
 
 When("r <- ray\\(origin, direction)", function () {
@@ -43,7 +43,7 @@ When("xs <- intersect\\(s, r)", function () {
 });
 
 When("i <- intersection\\({float}, s)", function (t: number) {              
-    this.i = new Intersection(t, this.s);
+    this.i = { t: t, object: this.s };
 });                                                                    
 
 When("xs <- intersections\\(i1, i2)", function () {

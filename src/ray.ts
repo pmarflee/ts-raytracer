@@ -12,7 +12,7 @@ export default class Ray {
         return this.origin.add(this.direction.multiply(distance));
     }
 
-    public intersect(sphere: Sphere) {
+    public intersect(sphere: Sphere): Intersection[] {
         let sphereToRay = this.origin.subtract(sphere.position),
             a = this.direction.dot(this.direction),
             b = 2 * this.direction.dot(sphereToRay),
@@ -24,6 +24,6 @@ export default class Ray {
         let t1 = (-b - Math.sqrt(discriminant)) / (2 * a),
             t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 
-        return [new Intersection(t1, sphere), new Intersection(t2, sphere)];
+        return [{ t: t1, object: sphere }, { t: t2, object: sphere }];
     }
 }
