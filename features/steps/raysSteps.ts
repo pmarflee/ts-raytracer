@@ -7,6 +7,7 @@ import Tuple from "../../src/tuple";
 import Ray from "../../src/ray";
 import Sphere from "../../src/sphere";
 import Intersection from "../../src/intersection";
+import Intersections from "../../src/intersections";
 
 chai.use(chaiAlmost(0.00001));
 
@@ -34,6 +35,14 @@ Given("i2 <- intersection\\({float}, s)", function (t: number) {
     this.i2 = { t: t, object: this.s };
 })
 
+Given("i3 <- intersection\\({float}, s)", function (t: number) {
+    this.i3 = { t: t, object: this.s };
+})
+
+Given("i4 <- intersection\\({float}, s)", function (t: number) {
+    this.i4 = { t: t, object: this.s };
+})
+
 When("r <- ray\\(origin, direction)", function () {
     this.r = new Ray(this.origin, this.direction);
 });
@@ -47,7 +56,19 @@ When("i <- intersection\\({float}, s)", function (t: number) {
 });                                                                    
 
 When("xs <- intersections\\(i1, i2)", function () {
-    this.xs = [this.i1, this.i2];
+    this.xs = new Intersections(this.i1, this.i2);
+});
+
+When("xs <- intersections\\(i2, i1)", function () {
+    this.xs = new Intersections(this.i2, this.i1);
+});
+
+When("xs <- intersections\\(i1, i2, i3, i4)", function () {
+    this.xs = new Intersections(this.i1, this.i2, this.i3, this.i4);
+});
+
+When("i <- hit\\(xs)", function () {
+    this.i = this.xs.hit;
 });
 
 Then("r.origin = origin", function () {
@@ -63,21 +84,39 @@ Then("position\\(r, {float}) = point\\({float}, {float}, {float})", function (t:
 });
 
 Then("xs.count = {int}", function (count: number) {
-    expect(this.xs.length).to.equal(count);
+    expect(this.xs.values.length).to.equal(count);
 });
 
 Then("i.t = {float}", function (expected: number) {
-    expect(this.i.t).to.equal(expected);
+    let i = this.i as Intersection;
+    expect(i).to.not.be.undefined && expect(i.t).to.equal(expected);
 });
 
 Then("i.object = s", function () {
-    expect(this.i.object).to.equal(this.s);
+    let i = this.i as Intersection;
+    expect(i).to.not.be.undefined && expect(i.object).to.equal(this.s);
 });
 
 Then("xs[{int}].t = {float}", function (index: number, expected: number) {
-    expect(this.xs[index].t).to.equal(expected);
+    expect(this.xs.values[index].t).to.equal(expected);
 });
 
 Then("xs[{int}].object = s", function (index: number) {
-    expect(this.xs[index].object).to.equal(this.s);
+    expect(this.xs.values[index].object).to.equal(this.s);
+});
+
+Then("i = i1", function () {
+    expect(this.i).to.equal(this.i1);
+});
+
+Then("i = i2", function () {
+    expect(this.i).to.equal(this.i2);
+});
+
+Then("i = i4", function () {
+    expect(this.i).to.equal(this.i4);
+});
+
+Then("i is nothing", function () {
+    expect(this.i).to.be.null;
 });
