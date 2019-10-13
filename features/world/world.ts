@@ -43,6 +43,7 @@ declare module "cucumber" {
         full_quarter: Matrix,
         half_quarter: Matrix,
         T: Matrix,
+        t: Matrix,
         r: Ray,
         r2: Ray,
         s: Sphere,
