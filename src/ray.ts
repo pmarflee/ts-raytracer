@@ -2,6 +2,7 @@ import Tuple from "./tuple";
 import Sphere from "./sphere";
 import Intersection from "./intersection";
 import Intersections from "./intersections";
+import Matrix from "./matrix";
 
 export default class Ray {
 
@@ -28,5 +29,12 @@ export default class Ray {
         return new Intersections(
             { t: t1, object: sphere }, 
             { t: t2, object: sphere });
+    }
+
+    public transform(matrix: Matrix) {
+        let origin = matrix.multiply(this.origin),
+            direction = matrix.multiply(this.direction);
+        
+        return new Ray(origin, direction);
     }
 }

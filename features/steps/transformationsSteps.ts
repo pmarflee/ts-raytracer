@@ -15,6 +15,10 @@ Given("C <- translation\\({int}, {int}, {int})", function (x: number, y: number,
     this.C = Matrix.translation(x, y, z);
 });
 
+Given("m <- translation\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.m = Matrix.translation(x, y, z);
+});
+
 Given("inv <- inverse\\(transform)", function () {
     this.inv = this.transform.inverse();
 });
@@ -25,6 +29,10 @@ Given("transform <- scaling\\({int}, {int}, {int})", function (x: number, y: num
 
 Given("B <- scaling\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
     this.B = Matrix.scaling(x, y, z);
+});
+
+Given("m <- scaling\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    this.m = Matrix.scaling(x, y, z);
 });
 
 Given("half_quarter <- rotation_x\\(π \/ {int})", function (v: number) {

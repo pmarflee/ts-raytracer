@@ -71,6 +71,10 @@ When("i <- hit\\(xs)", function () {
     this.i = this.xs.hit;
 });
 
+When("r2 <- transform\\(r, m)", function () {
+    this.r2 = this.r.transform(this.m);
+});
+
 Then("r.origin = origin", function () {
     expect(this.r.origin).to.eql(this.origin);
 });
@@ -119,4 +123,12 @@ Then("i = i4", function () {
 
 Then("i is nothing", function () {
     expect(this.i).to.be.null;
+});
+
+Then("r2.origin = point\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(this.r2.origin).to.eql(Tuple.point(x, y, z));
+}); 
+
+Then("r2.direction = vector\\({int}, {int}, {int})", function (x: number, y: number, z: number) {
+    expect(this.r2.direction).to.eql(Tuple.vector(x, y, z));
 });
