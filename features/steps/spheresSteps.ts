@@ -19,6 +19,14 @@ When("set_transform\\(s, t)", function () {
     this.s.transform = this.t;
 });
 
+When("set_transform\\(s, scaling {int} {int} {int})", function (x: number, y: number, z: number) {
+    this.s.transform = Matrix.scaling(x, y, z);
+});
+
+When("set_transform\\(s, translation {int} {int} {int})", function (x: number, y: number, z: number) {
+    this.s.transform = Matrix.translation(x, y, z);
+});
+
 Then("s.transform = identity_matrix", function () {
     expect(this.s.transform).to.eql(Matrix.identity);
 });

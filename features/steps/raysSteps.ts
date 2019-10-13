@@ -48,7 +48,7 @@ When("r <- ray\\(origin, direction)", function () {
 });
 
 When("xs <- intersect\\(s, r)", function () {
-    this.xs = this.r.intersect(this.s);
+    this.xs = this.s.intersect(this.r);
 });
 
 When("i <- intersection\\({float}, s)", function (t: number) {              
