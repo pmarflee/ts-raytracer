@@ -26,6 +26,7 @@ declare module "cucumber" {
         norm: Tuple,
         origin: Tuple,
         direction: Tuple,
+        n: Tuple,
         c: Color,
         c1: Color,
         c2: Color,

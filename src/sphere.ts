@@ -34,4 +34,7 @@ export default class Sphere implements Entity {
             { t: t2, object: this });
     }
 
+    public normalAt(point: Tuple) {
+        return point.subtract(this.position).normalize();
+    }
 }
